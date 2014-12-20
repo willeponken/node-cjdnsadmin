@@ -1,0 +1,25 @@
+{
+  "name": "node-cjdnsadmin",
+  "version": "0.0.1",
+  "description": "Cjdns API abstraction in NodeJS",
+  "main": "lib/cjdns.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "cjdns",
+    "api",
+    "abstraction"
+  ],
+  "author": "William Wenneström <william@megalicious.org>",
+  "license": "GPLv3",
+  "devDependencies": {
+    "mocha": "^2.0.1"
+  },
+  "dependencies": {
+    "bencode": "^0.6.0"
+  }
+}
