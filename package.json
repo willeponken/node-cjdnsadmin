@@ -1,5 +1,5 @@
 {
-  "name": "node-cjdnsadmin",
+  "name": "cjdnsadmin",
   "version": "0.0.1",
   "description": "Cjdns API abstraction in NodeJS",
   "main": "lib/cjdns.js",
