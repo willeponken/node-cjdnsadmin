@@ -12,8 +12,9 @@ I also want to learn all the available admin functions found in the API, and wri
 
 ##Methods
 
-###.ping([callback])
+###.ping([callback, optSock])
 * `callback` Function. Called when a message has been returned. Optional.
+* `optSock` Datagram socket. Optional.
 
 Ping the CJDNS Admin backend.
 
@@ -31,8 +32,9 @@ cjdns.ping(function(err, msg) {
 });
 ```
 
-###.Admin_availableFunctions([callback])
+###.Admin_availableFunctions([callback, optSock])
 * `callback` Function. Called when the available functions has been received.
+* `optSock` Datagram socket. Optional.
 
 Get all the available CJDNS Admin functions.
 
@@ -53,8 +55,9 @@ cjdns.Admin_availableFunctions(function(err, functions) {
 });
 ```
 
-###.Admin_asyncEnabled([callback])
+###.Admin_asyncEnabled([callback, optSock])
 * `callback` Function.
+* `optSock` Datagram socket. Optional.
 
 Find out if async calls are enabled.
 

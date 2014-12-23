@@ -32,7 +32,7 @@ describe('cjdns', function() {
         cjdns.Admin_asyncEnabled(function(err, result) {
           assert.ifError(err); 
 
-          if (!result === (false && true)) {
+          if (!result === (false || true)) {
             throw 'Wrong result ' + result;
           }
 
@@ -53,16 +53,19 @@ describe('cjdns', function() {
             assert.equal(typeof functions[func].params, 'object');
           }
 
+          console.log(functions);
+
           done();
         });
       });
     });
    
-   /* 
-    describe('.AdminLog_subscribe(options, callback optSock)', function() {
+    describe('.AdminLog_subscribe(options, callback, optSock)', function() {
       it('should something', function(done) {
         
-        cjdns.AdminLog_subscribe({ level: 'DEBUG' });
+        cjdns.AdminLog_subscribe({}, function(err) {
+          throw err;
+        });
         
         cjdns.on('log', function(err, logs) {
           console.log(err, logs);
@@ -70,6 +73,5 @@ describe('cjdns', function() {
 
       });
     });
-    */
   });
 });
