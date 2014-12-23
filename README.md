@@ -23,7 +23,7 @@ Example;
 cjdns.ping(function(err, msg) {
 
   if (err) {
-    console.err('Something went wrong', err);
+    console.error('Something went wrong', err);
   } else {
     console.log('Received the pong!', msg);
   }
@@ -41,7 +41,7 @@ Example;
 cjdns.Admin_availableFunctions(function(err, functions) {
 
   if (err) {
-    console.err('Failed to get available methods', err);
+    console.error('Failed to get available methods', err);
   } else {
     
     for (var func in functions) {
@@ -63,7 +63,7 @@ Example;
 cjdns.Admin_asyncEnabled(function(err, result) {
 
   if (err) {
-    console.err(err);
+    console.error('Oh noes!', err);
   } else if (result) {
     console.log('async is enabled');
   } else {
