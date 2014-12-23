@@ -57,5 +57,19 @@ describe('cjdns', function() {
         });
       });
     });
+   
+   /* 
+    describe('.AdminLog_subscribe(options, callback optSock)', function() {
+      it('should something', function(done) {
+        
+        cjdns.AdminLog_subscribe({ level: 'DEBUG' });
+        
+        cjdns.on('log', function(err, logs) {
+          console.log(err, logs);
+        });
+
+      });
+    });
+    */
   });
 });
