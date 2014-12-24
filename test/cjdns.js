@@ -53,8 +53,6 @@ describe('cjdns', function() {
             assert.equal(typeof functions[func].params, 'object');
           }
 
-          console.log(functions);
-
           done();
         });
       });
