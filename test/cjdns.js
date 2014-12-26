@@ -8,18 +8,16 @@ describe('cjdnsadmin', function() {
 
     var cjdns;
 
-    it('should parse config and ping admin backend', function(done) {
+    it('should parse config and ping admin backend', function() {
 
       cjdns = new CJDNS(process.env['HOME'] + '/.cjdnsadmin');
-
-      done();
     });
     
     describe('Abstractions', function() {
-      describe('.availableFunctions(callback)', function() {
+      describe('.Abs_availableFunctions(callback)', function() {
         it('should return callback with array containing available functions', function(done) {
 
-          cjdns.availableFunctions(function(err, functions) {
+          cjdns.Abs_availableFunctions(function(err, functions) {
             assert.ifError(err);
             assert.equal(typeof functions, 'object');
 
@@ -27,6 +25,18 @@ describe('cjdnsadmin', function() {
               assert.equal(typeof functions[func].name, 'string');
               assert.equal(typeof functions[func].params, 'object');
             }
+
+            done();
+          });
+        });
+      });
+      
+      describe('.Abs_ping(callback)', function() {
+        it('should return callback with ping result, true for success and false for failure', function(done) {
+
+          cjdns.Abs_ping(function(err, result) {
+            assert.ifError(err);
+            assert.equal(typeof result, 'boolean');
 
             done();
           });
@@ -58,12 +68,11 @@ describe('cjdnsadmin', function() {
             } else {
               throw 'Wrong result ' + msg.asyncEnabled;
             }
-
           });
         });
       });
     
-      describe('.Admin_availableFunctions(callback)', function() {
+      describe('.Admin_availableFunctions(page, callback)', function() {
         it('should return callback with array containing available functions', function(done) {
 
           cjdns.Admin_availableFunctions(0, function(err, functions) {
@@ -80,6 +89,33 @@ describe('cjdnsadmin', function() {
         });
       });
       
+      describe('.Allocator_bytesAllocated(callback)', function() {
+        it('should return callback with { bytes: [number] }, where [number] is the bytes allocated', function(done) {
+
+            cjdns.Allocator_bytesAllocated(function (err, bytes) {
+              bytes = bytes.bytes;
+
+              assert.ifError(err);
+              assert.equal(typeof bytes, 'number');
+              
+              done()
+            });
+        });
+      });
+      
+      describe('.Allocator_snapshot(includeAllocations, callback)', function() {
+        it('should return callback with memory tree dump', function(done) {
+
+            cjdns.Allocator_snapshot(1, function (err, snapshot) {
+
+              assert.ifError(err);
+              assert.equal(typeof snapshot, 'object');
+              
+              done()
+            });
+        });
+      });
+
       describe('.NodeStore_dumpTable(page, callback)', function() {
         it('should take page and return callback with NodeStore table as an object', function(done) {
 
