@@ -12,7 +12,7 @@ describe('cjdnsadmin', function() {
 
       cjdns = new CJDNS(process.env['HOME'] + '/.cjdnsadmin');
     });
-    
+
     describe('Abstractions', function() {
       describe('.Abs_availableFunctions(callback)', function() {
         it('should return callback with array containing available functions', function(done) {
@@ -21,7 +21,8 @@ describe('cjdnsadmin', function() {
             assert.ifError(err);
             assert.equal(typeof functions, 'object');
 
-            for (var func in functions) {
+            var funcLen = functions.length;
+            for (var func = 0; func < funcLen; func++) {
               assert.equal(typeof functions[func].name, 'string');
               assert.equal(typeof functions[func].params, 'object');
             }
