@@ -10,6 +10,8 @@ This is a abstraction for the CJDNS Admin API for NodeJS, it's heavily copied fr
 I need it for https://github.com/willeponken/hotspot and want to have seperate modules (mostly because tests using CJDNS can't be run on Travis CI).
 I also want to learn all the available admin functions found in the API, and write down a documentation for them later.
 
+#Documentation
+
 ##Method abstractions
 
 ###.Abs_ping([callback, optSock])
