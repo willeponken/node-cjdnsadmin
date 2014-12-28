@@ -110,7 +110,47 @@ describe('cjdnsadmin', function() {
             cjdns.Allocator_snapshot(1, function (err, snapshot) {
 
               assert.ifError(err);
-              assert.equal(typeof snapshot, 'object');
+              assert.equal(snapshot.error, 'none');
+              
+              done()
+            });
+        });
+      });
+      
+      describe('.AuthorizedPasswords_add(user, password, [authType, ipv6, callback])', function() {
+        it('should add a new authorized password and return callback', function(done) {
+
+            cjdns.AuthorizedPasswords_add('test', 'test1test2test3test4', undefined, undefined, function (err, msg) {
+
+              assert.ifError(err);
+              assert.equal(typeof msg, 'object');
+              
+              done()
+            });
+        });
+      });
+      
+      describe('.AuthorizedPasswords_list(callback)', function() {
+        it('should return callback with a list of authorized users', function(done) {
+
+            cjdns.AuthorizedPasswords_list(function (err, users) {
+              assert.ifError(err);
+              
+              users = users.users;
+              assert.notEqual(users.indexOf('test'), -1);
+              
+              done()
+            });
+        });
+      });
+      
+      describe('.AuthorizedPasswords_remove(user, [callback])', function() {
+        it('should remove an user from authorized passwords and return callback with status', function(done) {
+
+            cjdns.AuthorizedPasswords_remove('test', function (err, msg) {
+
+              assert.ifError(err);
+              assert.equal(msg.error, 'none');
               
               done()
             });

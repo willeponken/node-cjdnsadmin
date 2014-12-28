@@ -32,7 +32,7 @@ cjdns.Abs_ping(function(err, result) {
 });
 ```
 
-###.Abs_availableFunctions([callback, optSock])
+###.Abs_availableFunctions(callback, [optSock])
 * `callback` Function. Called when the available functions has been received.
 * `optSock` Datagram socket. Optional.
 
@@ -55,7 +55,7 @@ cjdns.Abs_availableFunctions(function(err, functions) {
 });
 ```
 
-###.Abs_asyncEnabled([callback, optSock])
+###.Abs_asyncEnabled(callback, [optSock])
 * `callback` Function.
 * `optSock` Datagram socket. Optional.
 
@@ -95,7 +95,7 @@ cjdns.ping(function(err, msg) {
 });
 ```
 
-###.Admin_asyncEnabled([callback])
+###.Admin_asyncEnabled(callback)
 * `callback` Function.
 
 Find out if async calls are enabled, returns object `{ 'asyncEnabled': [number] }`.
@@ -114,7 +114,7 @@ cjdns.Admin_asyncEnabled(function(err, msg) {
 });
 ```
 
-###.Admin_availableFunctions(page, [callback])
+###.Admin_availableFunctions(page)
 * `page` Number.
 * `callback` Function.
 
@@ -134,7 +134,7 @@ cjdns.Admin_availableFunctions(0, functions(err, functions) {
 });
 ```
 
-###.Allocator_bytesAllocated([callback])
+###.Allocator_bytesAllocated(callback)
 * `callback` Function.
 
 Get the number of bytes that is allocated by CJDNS, returns object `{ 'bytes': [number] }`.
@@ -149,5 +149,85 @@ cjdns.Allocator_bytesAllocated(function(err, bytes) {
   }
 
   console.log('There is', bytes, 'allocated');
+});
+```
+
+###.Allocator_snapshot(includeAllocations, [callback]
+* `callback` Function. Optional.
+
+Dump CJDNS' memory snapshot to stderr.
+
+Example;
+```
+cjdns.Allocator_snapshot(0);
+```
+
+###.AuthorizedPasswords_add(user, password, [authType, ipv6, callback])
+* `user` String.
+* `password` String.
+* `authType` String. Optional.
+* `ipv6` String. Optional.
+* `callback` Function. Optional.
+
+Add a new user to authorized passwords.
+
+Example;
+```
+cjdns.AuthorizedPasswords_add('willeponken', 'qwertasdfgzxcvbn123');
+```
+
+###.AuthorizedPasswords_list(callback)
+* `callback` Function. Optional.
+
+Get a list of all authorized users.
+
+Example;
+```
+cjdns.AuthorizedPasswords_list(function(err, users) {
+  if (err) {
+    throw err;
+  }
+
+  console.log('There are', users.total, 'authorized users');
+
+  users = users.users;
+  users.forEach(function(user) {
+    console.log(users[user]);
+  });
+}
+```
+
+###.AuthorizedPasswords_remove(user, [callback])
+* `user` String.
+* `callback` Function. Optional.
+
+Remove a user from the authorized passwords.
+
+Example;
+```
+cjdns.AuthorizedPasswords_remove('willeponken', function(err, msg) {
+  if (err) {
+    console.error('Failed to remove user', err);
+  }
+
+  if (msg.error !== 'none') {
+    console.error('Failed to rmeove user', msg.error);
+  }
+});
+```
+###.NodeStore_dumpTable(page, callback)
+* `page` Number.
+* `callback` Function.
+
+Get a dump of CJDNS' NodeStore table.
+
+Example;
+```
+cjdns.NodeStore_dumpTable(0, function(err, table) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(table);
 });
 ```
