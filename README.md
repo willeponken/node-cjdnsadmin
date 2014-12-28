@@ -116,7 +116,7 @@ cjdns.Admin_asyncEnabled(function(err, msg) {
 });
 ```
 
-###.Admin_availableFunctions(page)
+###.Admin_availableFunctions(page, callback)
 * `page` Number.
 * `callback` Function.
 
