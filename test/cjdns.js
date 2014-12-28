@@ -8,7 +8,7 @@ describe('cjdnsadmin', function() {
 
     var cjdns;
 
-    it('should parse config and ping admin backend', function() {
+    it('should parse config and create native methods from available CJDNS functions', function() {
 
       cjdns = new CJDNS(process.env['HOME'] + '/.cjdnsadmin');
     });
@@ -156,6 +156,37 @@ describe('cjdnsadmin', function() {
             });
         });
       });
+     
+      // I probably need to implement some kind of "start CJDNS method before testing this.
+      /* 
+      describe('.Core_exit(callback)', function() {
+        it('should stop CJDNS and return callback with status', function(done) {
+
+            cjdns.Core_exit(function (err, result) {
+              assert.ifError(err);
+              assert.equal(result.error, 'none');
+              
+              done()
+            });
+        });
+      });
+      */
+
+      // Is this one deprecated (I don't get it to work)? The documentation says:
+      // This function is used during cjdns startup to initialize the TUN device, set it's IP address and set the MTU, ***it is hastily designed and may be removed in the future.***
+      /*
+      describe('.Core_initTunnel(desiredTunName, callback)', function() {
+        it('should setup a TUN device', function(done) {
+
+            cjdns.Core_initTunnel('cjdnsadmin', function (err, result) {
+              assert.ifError(err);
+              assert.equal(result.error, 'none');
+              
+              done()
+            });
+        });
+      });
+      */
 
       describe('.NodeStore_dumpTable(page, callback)', function() {
         it('should take page and return callback with NodeStore table as an object', function(done) {

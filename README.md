@@ -233,3 +233,48 @@ cjdns.NodeStore_dumpTable(0, function(err, table) {
   console.log(table);
 });
 ```
+
+###.Core_exit([callback])
+* `callback` Function. Optional.
+
+__Notice:__ This one is not enabled in the unit test because it... You know, exits CJDNS.
+
+Stop CJDNS core.
+
+Example;
+```
+cjdns.Core_exit(function(err, result) {
+  if (err) {
+    throw err;
+  }
+
+  if (result.error === 'none') {
+    console.log('Exited the CJDNS core');
+  } else {
+    console.error('Failed to exit', result.error);
+  }
+});
+```
+
+###.Core.initTunnel(desiredTunName, [callback])
+* `desiredTunName` String. Set to 0 to let kernel decide.
+* `callback` Function. Optional.
+
+__Notice:__ This functions is probably deprecated (does not work, atleast for me). See unit test (`/test/cjdns.js`) and uncomment if you want to test it for yourself.
+
+Set up TUN device using the same function as CJDNS uses during startup.
+
+Example;
+```
+cjdns.Core_initTunnel('cjdnsadmin', function(err, result) {
+  if (err) {
+    throw err;
+  }
+
+  if (result.error === 'none') {
+    console.log('Successfully set up TUN device');
+  } else {
+    console.error('Oh snap! Failed to set up TUN');
+  }
+});
+```
