@@ -256,7 +256,7 @@ cjdns.Core_exit(function(err, result) {
 });
 ```
 
-###.Core.initTunnel(desiredTunName, [callback])
+###.Core_initTunnel(desiredTunName, [callback])
 * `desiredTunName` String. Set to 0 to let kernel decide.
 * `callback` Function. Optional.
 
@@ -276,5 +276,22 @@ cjdns.Core_initTunnel('cjdnsadmin', function(err, result) {
   } else {
     console.error('Oh snap! Failed to set up TUN');
   }
+});
+```
+
+###.Core_pid(callback)
+* `callback` Function.
+
+Get PID of the CJDNS core process.
+
+Example;
+```
+cjdns.Core_pid(function (err, pid) {
+  if (err) {
+    throw err;
+  }
+
+  pid = pid.pid;
+  console.log('PID is', pid);
 });
 ```

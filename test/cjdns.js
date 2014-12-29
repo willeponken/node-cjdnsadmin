@@ -187,6 +187,19 @@ describe('cjdnsadmin', function() {
         });
       });
       */
+      
+      describe('.Core_pid(callback)', function() {
+        it('should return the PID of the CJDNS core process', function(done) {
+
+            cjdns.Core_pid(function (err, pid) {
+
+              assert.ifError(err);
+              assert.equal(typeof pid.pid, 'number');
+              
+              done()
+            });
+        });
+      });
 
       describe('.NodeStore_dumpTable(page, callback)', function() {
         it('should take page and return callback with NodeStore table as an object', function(done) {
