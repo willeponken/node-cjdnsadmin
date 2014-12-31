@@ -89,71 +89,71 @@ describe('cjdnsadmin', function() {
           });
         });
       });
-      
+
       describe('.Allocator_bytesAllocated(callback)', function() {
         it('should return callback with { bytes: [number] }, where [number] is the bytes allocated', function(done) {
 
-            cjdns.Allocator_bytesAllocated(function (err, bytes) {
-              bytes = bytes.bytes;
+          cjdns.Allocator_bytesAllocated(function (err, bytes) {
+            bytes = bytes.bytes;
 
-              assert.ifError(err);
-              assert.equal(typeof bytes, 'number');
-              
-              done()
-            });
+            assert.ifError(err);
+            assert.equal(typeof bytes, 'number');
+
+            done()
+          });
         });
       });
-      
+
       describe('.Allocator_snapshot(includeAllocations, callback)', function() {
         it('should return callback with memory tree dump', function(done) {
 
-            cjdns.Allocator_snapshot(1, function (err, snapshot) {
+          cjdns.Allocator_snapshot(1, function (err, snapshot) {
 
-              assert.ifError(err);
-              assert.equal(snapshot.error, 'none');
-              
-              done()
-            });
+            assert.ifError(err);
+            assert.equal(snapshot.error, 'none');
+
+            done()
+          });
         });
       });
-      
+
       describe('.AuthorizedPasswords_add(user, password, [authType, ipv6, callback])', function() {
         it('should add a new authorized password and return callback', function(done) {
 
-            cjdns.AuthorizedPasswords_add('test', 'test1test2test3test4', undefined, undefined, function (err, msg) {
+          cjdns.AuthorizedPasswords_add('test', 'test1test2test3test4', undefined, undefined, function (err, msg) {
 
-              assert.ifError(err);
-              assert.equal(typeof msg, 'object');
-              
-              done()
-            });
+            assert.ifError(err);
+            assert.equal(typeof msg, 'object');
+
+            done()
+          });
         });
       });
       
       describe('.AuthorizedPasswords_list(callback)', function() {
         it('should return callback with a list of authorized users', function(done) {
 
-            cjdns.AuthorizedPasswords_list(function (err, users) {
-              assert.ifError(err);
-              
-              users = users.users;
-              assert.notEqual(users.indexOf('test'), -1);
-              
-              done()
-            });
+          cjdns.AuthorizedPasswords_list(function (err, users) {
+            assert.ifError(err);
+            
+            users = users.users;
+            assert.notEqual(users.indexOf('test'), -1);
+            
+            done()
+          });
         });
       });
       
       describe('.AuthorizedPasswords_remove(user, [callback])', function() {
         it('should remove an user from authorized passwords and return callback with status', function(done) {
 
-            cjdns.AuthorizedPasswords_remove('test', function (err, msg) {
+          cjdns.AuthorizedPasswords_remove('test', function (err, msg) {
 
-              assert.ifError(err);
-              assert.equal(msg.error, 'none');
-              
-              done()
-            });
+            assert.ifError(err);
+            assert.equal(msg.error, 'none');
+            
+            done()
+          });
         });
       });
      
@@ -162,12 +162,12 @@ describe('cjdnsadmin', function() {
       describe('.Core_exit(callback)', function() {
         it('should stop CJDNS and return callback with status', function(done) {
 
-            cjdns.Core_exit(function (err, result) {
-              assert.ifError(err);
-              assert.equal(result.error, 'none');
-              
-              done()
-            });
+          cjdns.Core_exit(function (err, result) {
+            assert.ifError(err);
+            assert.equal(result.error, 'none');
+            
+            done()
+          });
         });
       });
       */
@@ -178,12 +178,12 @@ describe('cjdnsadmin', function() {
       describe('.Core_initTunnel(desiredTunName, callback)', function() {
         it('should setup a TUN device', function(done) {
 
-            cjdns.Core_initTunnel('cjdnsadmin', function (err, result) {
-              assert.ifError(err);
-              assert.equal(result.error, 'none');
-              
-              done()
-            });
+          cjdns.Core_initTunnel('cjdnsadmin', function (err, result) {
+            assert.ifError(err);
+            assert.equal(result.error, 'none');
+            
+            done()
+          });
         });
       });
       */
@@ -191,27 +191,44 @@ describe('cjdnsadmin', function() {
       describe('.Core_pid(callback)', function() {
         it('should return the PID of the CJDNS core process', function(done) {
 
-            cjdns.Core_pid(function (err, pid) {
+          cjdns.Core_pid(function (err, pid) {
 
-              assert.ifError(err);
-              assert.equal(typeof pid.pid, 'number');
-              
-              done()
-            });
+            assert.ifError(err);
+            assert.equal(typeof pid.pid, 'number');
+            
+            done()
+          });
         });
       });
 
       describe('.NodeStore_dumpTable(page, callback)', function() {
         it('should take page and return callback with NodeStore table as an object', function(done) {
 
-            cjdns.NodeStore_dumpTable(0, function (err, table) {
-              assert.ifError(err);
-              assert.equal(typeof table, 'object');
-              
-              done()
-            });
+          cjdns.NodeStore_dumpTable(0, function (err, table) {
+            assert.ifError(err);
+            assert.equal(typeof table, 'object');
+            
+            done()
+          });
         });
       });
+     
+      // You'll need to have the specified address in your NodeStore table to find it's pubkey, uncomment and replace with
+      // your own if you want to test this function.
+      /*
+      describe('.NodeStore_nodeForAddr(ip, callback)', function() {
+        it('should take ip (from cjdns) and return callback with pubkey for specified address', function(done) {
+
+          cjdns.NodeStore_nodeForAddr('fc15:491b:549:9d8a:8480:45f8:bd10:a53e', function (err, data) {
+            assert.ifError(err);
+            assert.equal(data.error, 'none');
+            assert.equal(typeof data.result, 'object');
+            
+            done()
+          });
+        });
+      });
+      */
     });
 
     /* 

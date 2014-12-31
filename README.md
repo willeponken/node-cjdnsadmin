@@ -217,22 +217,6 @@ cjdns.AuthorizedPasswords_remove('willeponken', function(err, msg) {
   }
 });
 ```
-###.NodeStore_dumpTable(page, callback)
-* `page` Number.
-* `callback` Function.
-
-Get a dump of CJDNS' NodeStore table.
-
-Example;
-```
-cjdns.NodeStore_dumpTable(0, function(err, table) {
-  if (err) {
-    throw err;
-  }
-
-  console.log(table);
-});
-```
 
 ###.Core_exit([callback])
 * `callback` Function. Optional.
@@ -293,5 +277,58 @@ cjdns.Core_pid(function (err, pid) {
 
   pid = pid.pid;
   console.log('PID is', pid);
+});
+```
+
+###.NodeStore_dumpTable(page, callback)
+* `page` Number.
+* `callback` Function.
+
+Get a dump of CJDNS' NodeStore table.
+
+Example;
+```
+cjdns.NodeStore_dumpTable(0, function(err, table) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(table);
+});
+```
+
+###.NodeStore_nodeForAddr(ip, callback)
+* `ip` String.
+* `callback` Function.
+
+Takes the IP for a node and returns information about that node.
+
+The data returned looks somewhat like this;
+```
+{ error: 'none',
+  result: 
+   { bestParent: 
+      { ip: 'fc74:73e8:3913:f15b:d463:2fe7:db69:381e',
+        parentChildLabel: '0000.0000.0000.0001' },
+     encodingScheme: [ [Object], [Object], [Object] ],
+     key: 'mh9sdvb6jv69x76y21kk5vp0n5dmtrtxl6zl7dck1ywcq2c49xn0.k',
+     linkCount: 3,
+     protocolVersion: 12,
+     reach: 4294967295,
+     routeLabel: '0000.0000.0000.0001' } }
+```
+
+Example;
+```
+cjdns.NodeStore_nodeForAddr('fc74:73e8:3913:f15b:d463:2fe7:db69:381e', function(err, data) {
+  if (err) {
+    throw err;
+  }
+
+  if (data.error === 'none') {
+    console.log(data.result);
+  } else {
+    console.warn('Unable to find IP');
+  }
 });
 ```
