@@ -372,6 +372,7 @@ cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
 
 Get peer stats.
 
+Example;
 ```
 cjdns.InterfaceControler_peerStats(0, function(err, stats) {
   if (err) {
