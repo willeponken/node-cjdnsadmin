@@ -200,6 +200,109 @@ describe('cjdnsadmin', function() {
           });
         });
       });
+      
+      describe('.ETHInterface_beacon(interfaceNumber, state, callback)', function() {
+        it('should enable sending or receiving of ETHInterface beacon messages', function(done) {
+
+          var beacon;
+
+          // Get the current beacon state
+          cjdns.ETHInterface_beacon(0, function(err, msg) {
+            assert.ifError(err);
+            assert.equal(msg.error, 'none');
+
+            beacon = msg.state;
+          
+            // Change the beacon state to 2
+            cjdns.ETHInterface_beacon(2, 0, function (err, msg) {
+
+              assert.ifError(err);
+              assert.equal(msg.error, 'none');
+              assert.equal(msg.state, 2);
+
+              // If the beacon state isnt the same as before, reset it to original state
+              if (msg.state !== beacon) {
+                cjdns.ETHInterface_beacon(beacon, 0, function(err, msg) {
+                  assert.ifError(err);
+                  assert.equal(msg.error, 'none');
+                  assert.equal(msg.state, beacon);
+                  
+                  done()
+                });
+              }
+            });
+          });
+
+        });
+      });
+
+      // This one is pretty much untestable, feel free to uncomment and populate with correct parameters
+      /*
+      describe('.ETHInterface_beginConnection(publicKey, macAddress, interfaceNumber, password,  callback)', function() {
+        it('should connect an ETHInterface to another computer which has an ETHInterface running', function(done) {
+
+          cjdns.ETHInterface_beginConnection('pubKey', 'macAddress', 'interfaceNumber', 'password', function(err, msg) {
+            assert.ifError(err);
+            assert.equal(msg.error, 'none');
+          });
+        });
+      });
+      */
+
+      // Yet another untestable one, feel free to uncomment and edit interface to the correct one. You'll need to
+      // run this as root or else it'll fail with "'error': 'call to socket() failed. [permission denied]'"
+      /*
+      describe('.ETHInterface_new(bindDevice, callback)', function() {
+        it('should create a new ETHInterface and bind it to a device', function(done) {
+
+          cjdns.ETHInterface_new('eth0', function(err, msg) {
+            assert.ifError(err);
+            assert.equal(typeof msg.interfaceNumber, 'number');
+          });
+        });
+      });
+      */
+
+      describe('.InterfaceController_disconnectPeer(pubKey, callback)', function() {
+        it('should disconnect a peer by public key', function(done) {
+
+          cjdns.InterfaceController_disconnectPeer('pubKey', function (err, msg) {
+            assert.ifError(err);
+            assert.equal(msg.error, 'bad key'); // Well, atleast it connectected to the CJDNS admin backend?
+                                                // You could change this to a real pubkey, and change 'bad key' to 'none',
+                                                // to test if it REALLY works.
+            
+            done()
+          });
+        });
+      });
+
+      describe('.InterfaceController_peerStats(page, callback)', function() {
+        it('should take page and return peer stats in callback', function(done) {
+
+          cjdns.InterfaceController_peerStats(0, function (err, stats) {
+            assert.ifError(err);
+            assert.equal(typeof stats.peers, 'object');
+            
+            done()
+          });
+        });
+      });
+      
+      describe('.IpTunnel_allowConnection(publicKeyOfAuthorizedNode, ip6Prefix, ip6Address, callback)', function() {
+        it('should allow incomming connection from another node', function(done) {
+
+          cjdns.IpTunnel_allowConnection('pubKey', 54, 'ip6Address', function (err, msg) {
+            assert.ifError(err);
+            assert.equal(msg.error, 'key must be 52 characters long'); // Successfully talked to the CJDNS admin backend,
+                                                                       // Replace 'pukKey' with a correct one and also
+                                                                       // change ip6Prefix and ip6Address as it fits if
+                                                                       // you want to test the rest.
+            
+            done()
+          });
+        });
+      });
 
       describe('.NodeStore_dumpTable(page, callback)', function() {
         it('should take page and return callback with NodeStore table as an object', function(done) {

@@ -280,6 +280,106 @@ cjdns.Core_pid(function (err, pid) {
 });
 ```
 
+###.ETHInterface_beacon(interfaceNumber, state [callback])
+* `interfaceNumber` Number. Default 0 to receive current state.
+* `state` Number. Optional. Set to 0-2 to change to desired beacon mode.
+* `callback` Function. Optional.
+
+Get state of beacon mode, or change it.
+
+Example;
+```
+
+// Get current beacon mode
+cjdns.ETHInterface_beacon(0, function(err, msg) {
+  if (err) {
+    throw err;
+  }
+
+  console.log('The current state state is', msg.state);
+});
+
+// Change beacon mode to 2
+cjdns.ETHInterface_beacon(0, 2);
+```
+
+###.ETHInterface_beginConnection(pubKey, macAddress, interfaceNumber, password, [callback])
+* `pubKey` String.
+* `macAddress` String.
+* `interfaceNumber` Number.
+* `password` String.
+* `callback` Function. Optional.
+
+Connect an ETHInterface to another computer which has an ETHInterface running.
+
+Example;
+```
+cjdns.ETHInterface_beginConnection('pubKey', 'ab:cd:ef:12:34:45', 0, 'asdfzxcvbn1234', function(err, msg) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(msg);
+});
+```
+
+###.ETHInterface_new(bindDevice, [callback])
+* `bindDevice` String.
+* `callback` Function. Optional.
+
+__Notice:__ You'll need to run this as root or else it'll faild with "'error': 'call to socket() failed. [permission denied]'".
+
+Create a new ETHInterface and bind it to a device.
+
+Example;
+```
+cjdns.ETHInterface_new('eth0', function(err, msg) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(msg);
+});
+```
+###.InterfaceController_disconnectPeer(pubKey, [callback])
+* `pubKey` String.
+* `callback` Function. Optional.
+
+Disconnect a peer by public key.
+
+Example;
+```
+cjdns.InterfaceController_disconnectPeer('pubKey');
+```
+
+###.IpTunnel_allowConnection(pubKeyOfAuthorizedNode, ip6Prefix, ip6Address, [callback])
+* `pubKeyOfAuthorizedNode` String.
+* `ip6Prefix` Number.
+* `ip6Address` String.
+* `callback` Function. Optional.
+
+Allow incommming connection from another node.
+
+Example;
+```
+cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
+```
+
+###.InterfaceController_peerStats(page, callback)
+* `page` Number.
+* `callback` Function.
+
+Get peer stats.
+
+cjdns.InterfaceControler_peerStats(0, function(err, stats) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(stats.peers);
+});
+```
+
 ###.NodeStore_dumpTable(page, callback)
 * `page` Number.
 * `callback` Function.
