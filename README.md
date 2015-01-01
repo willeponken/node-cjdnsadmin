@@ -341,6 +341,7 @@ cjdns.ETHInterface_new('eth0', function(err, msg) {
   console.log(msg);
 });
 ```
+
 ###.InterfaceController_disconnectPeer(pubKey, [callback])
 * `pubKey` String.
 * `callback` Function. Optional.
@@ -370,7 +371,8 @@ cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
 * `callback` Function.
 
 Get peer stats.
-
+i
+```
 cjdns.InterfaceControler_peerStats(0, function(err, stats) {
   if (err) {
     throw err;
