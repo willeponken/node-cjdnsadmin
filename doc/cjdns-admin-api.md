@@ -698,6 +698,36 @@ authenticated calls whereas manually calling it without authentication returns f
     }
 
 
+### Allocator Functions
+These functions are for getting data from the cjdns allocator.
+
+#### Allocator_bytesAllocated()
+
+Get the number of bytes that is allocated by cjdns.
+
+Returns:
+* String **bytes**: the number of bytes that is allocated by the cjdns core.
+
+Example:
+
+    $ ./contrib/python/cexec 'Allocator_bytesAllocated()'
+    {'bytes': 637616, 'txid': 'SLFZY7AE5'}
+
+#### Allocator_snapshot()
+
+Dump cjdns memory snapshot to stderr.
+
+Paramters:
+* Int **includeAllocations**: if non-zero then the individual memory allocations will be printed.
+
+Returns:
+* String **error**: `none` if all goes well, otherwise description of the error that occured.
+
+Example:
+
+    $ ./contrib/python/cexec 'Allocator_snapshot()'
+    {txid': '1JFK6TGH3K', 'error': 'none'}
+
 ### Security Functions
 
 These functions are available for putting the cjdns core into a sandbox where
