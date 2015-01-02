@@ -12,5 +12,5 @@ I also want to learn all the available admin functions found in the API, and wri
 
 #Documentation
 
-[CJDNS Admin API](/doc/cjdns-admin-api.md)
-[node-cjdnsadmin](/doc/node-cjdnsadmin.md)
+* [CJDNS Admin API](/doc/cjdns-admin-api.md)
+* [node-cjdnsadmin](/doc/node-cjdnsadmin.md)
