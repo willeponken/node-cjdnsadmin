@@ -303,6 +303,56 @@ describe('cjdnsadmin', function() {
           });
         });
       });
+      
+      describe('.IpTunnel_connectTo(publicKeyOfNodeToConnectTo, callback)', function() {
+        it('should Initiate an outgoing connection to another node and request IP addresses from them', function(done) {
+
+          cjdns.IpTunnel_connectTo('pubKey', function (err, msg) {
+            assert.ifError(err);
+            assert.equal(msg.error, 'key must be 52 characters long'); // Successfully talked to the CJDNS admin backend,
+                                                                       // Replace 'pukKey' with a correct one if you want 
+                                                                       // to test the rest.
+            
+            done()
+          });
+        });
+      });
+      
+      describe('.IpTunnel_listConnections(callback)', function() {
+        it('should list iptunnel connections', function(done) {
+
+          cjdns.IpTunnel_listConnections(function (err, msg) {
+            assert.ifError(err);
+            assert.equal(typeof msg.connections, 'object');
+
+            done()
+          });
+        });
+      });
+      
+      describe('.IpTunnel_removeConnection(connection, callback)', function() {
+        it('should remove iptunnel connection based on connection number (NOT IMPLEMENTED)', function(done) {
+
+          cjdns.IpTunnel_removeConnection(2147483647, function (err, msg) { // Hopefully you don't have that many connections
+            assert.ifError(err);
+            assert.equal(msg.error, 'not implemented'); // As of now, this functions is not implemented 
+
+            done()
+          });
+        });
+      });
+      
+      describe('.IpTunnel_showConnection(connection, callback)', function() {
+        it('should show iptunnel connection based on connection number (NOT IMPLEMENTED)', function(done) {
+
+          cjdns.IpTunnel_removeConnection(0, function (err, msg) {
+            assert.ifError(err);
+            assert.equal(msg.error, 'not implemented'); // As of now, this functions is not implemented 
+
+            done()
+          });
+        });
+      });
 
       describe('.NodeStore_dumpTable(page, callback)', function() {
         it('should take page and return callback with NodeStore table as an object', function(done) {

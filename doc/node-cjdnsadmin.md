@@ -342,19 +342,6 @@ Example;
 cjdns.InterfaceController_disconnectPeer('pubKey');
 ```
 
-###.IpTunnel_allowConnection(pubKeyOfAuthorizedNode, ip6Prefix, ip6Address, [callback])
-* `pubKeyOfAuthorizedNode` String.
-* `ip6Prefix` Number.
-* `ip6Address` String.
-* `callback` Function. Optional.
-
-Allow incommming connection from another node.
-
-Example;
-```
-cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
-```
-
 ###.InterfaceController_peerStats(page, callback)
 * `page` Number.
 * `callback` Function.
@@ -369,6 +356,85 @@ cjdns.InterfaceControler_peerStats(0, function(err, stats) {
   }
 
   console.log(stats.peers);
+});
+```
+
+###.IpTunnel_allowConnection(pubKeyOfAuthorizedNode, ip6Prefix, ip6Address, [callback])
+* `pubKeyOfAuthorizedNode` String.
+* `ip6Prefix` Number.
+* `ip6Address` String.
+* `callback` Function. Optional.
+
+Allow incommming connection from another node.
+
+Example;
+```
+cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
+```
+
+###.IpTunnel_connectTo(publicKeyOfNodeToConnectTo, [callback])
+* `publicKeyOfNodeToConnectTo` String.
+* `callback` Function. Optional.
+
+Initiate an outgoing connection to another node and request IP addresses from them.
+
+Example;
+```
+cjdns.IpTunnel_connectTo('pubKey');
+```
+
+###.IpTunnel_listConnections(callback)
+* `callback` Function.
+
+List IP tunnel connections.
+
+Example;
+```
+cjdns.IpTunnel_listConnections(function(err, connections) {
+  if (err) {
+    throw err;
+  }
+
+  connections = connections.connections;
+  console.log('IP tunnel connections', connections);
+});
+```
+
+###.IpTunnel_removeConnection(connection, [callback])
+* `connection` Number.
+* `callback` Function. Optional.
+
+__Notice:__ NOT IMPLEMENTED
+
+Remove IP tunnel connection based on connection number, which can be obtained from `IpTunnel_listConnections()`.
+
+Example;
+```
+cjdns.IpTunnel_removeConnection(0, function(err, msg) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(msg.error); // msg.error == 'not implemented'
+});
+```
+
+###.IpTunnel_showConnection(connection, [callback])
+* `connection` Number.
+* `callback` Function. Optional.
+
+__Notice:__ NOT IMPLEMENTED
+
+Show IP tunnel connection based on connection number, which can be obtained from `IpTunnel_listConnections()`.
+
+Example;
+```
+cjdns.IpTunnel_showConnection(0, function(err, msg) {
+  if (err) {
+    throw err;
+  }
+
+  console.log(msg.error); // msg.error == 'not implemented'
 });
 ```
 
