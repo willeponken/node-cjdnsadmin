@@ -20,4 +20,4 @@ The documents here are for both node-cjdnsadmin and native CJDNS.
 > `{ "some": "data here" }`
 
 - [ ] Document all of the native CJDNS function in node-cjdnsadmin.md
-- [ ] Rewrite cjdns-admin-api.md with new functions, and also adding example data for everything
+- [ ] Rewrite cjdns-admin-api.md with new functions, and also add example data for everything
