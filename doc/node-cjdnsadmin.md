@@ -52,7 +52,8 @@ cjdns.Abs_availableFunctions(function(err, functions) {
 
 Find out if async calls are enabled.
 
-Example;
+#####Example
+__Code__:
 ```
 cjdns.Abs_asyncEnabled(function(err, result) {
 
@@ -74,7 +75,8 @@ cjdns.Abs_asyncEnabled(function(err, result) {
 
 Ping the CJDNS Admin backend, returns `{ 'q': 'pong' }` on success.
 
-Example;
+#####Example
+__Code__:
 ```
 cjdns.ping(function(err, msg) {
   
@@ -86,12 +88,18 @@ cjdns.ping(function(err, msg) {
 });
 ```
 
+__Data__:
+```
+{ q: 'pong' }
+```
+
 ###.Admin_asyncEnabled(callback)
 * `callback` Function.
 
 Find out if async calls are enabled, returns object `{ 'asyncEnabled': [number] }`.
 
-Example;
+#####Example
+__Code__:
 ```
 cjdns.Admin_asyncEnabled(function(err, msg) {
   
@@ -105,15 +113,22 @@ cjdns.Admin_asyncEnabled(function(err, msg) {
 });
 ```
 
+__Data__:
+```
+{ asyncEnabled: 1 }
+```
+
 ###.Admin_availableFunctions(page, callback)
 * `page` Number.
 * `callback` Function.
 
 Get all the available CJDNS Admin functions, where `page` is the page to return.
 
-Example;
+#####Example
+__Code__:
 ```
 cjdns.Admin_availableFunctions(0, functions(err, functions) {
+  functions = functions.availableFunctions;
 
   if (err) {
     throw err;
@@ -123,6 +138,23 @@ cjdns.Admin_availableFunctions(0, functions(err, functions) {
     console.log(functions[func]);
   }
 });
+```
+
+__Data__:
+```
+{ availableFunctions: 
+   { AdminLog_logMany: { count: { required: 1, type: 'Int' } },
+     AdminLog_subscribe: 
+      { file: { required: 0, type: 'String' },
+        level: { required: 0, type: 'String' },
+        line: { required: 0, type: 'Int' } },
+     AdminLog_subscriptions: {},
+     AdminLog_unsubscribe: { streamId: { required: 1, type: 'String' } },
+     Admin_asyncEnabled: {},
+     Admin_availableFunctions: { page: { required: 0, type: 'Int' } },
+     InterfaceController_disconnectPeer: { pubkey: { required: 1, type: 'String' } },
+     InterfaceController_peerStats: { page: { required: 0, type: 'Int' } } },
+  more: 1 }
 ```
 
 ###.Allocator_bytesAllocated(callback)
@@ -408,7 +440,8 @@ __Notice:__ NOT IMPLEMENTED
 
 Remove IP tunnel connection based on connection number, which can be obtained from `IpTunnel_listConnections()`.
 
-Example;
+#####Example
+__Code__:
 ```
 cjdns.IpTunnel_removeConnection(0, function(err, msg) {
   if (err) {
@@ -418,6 +451,12 @@ cjdns.IpTunnel_removeConnection(0, function(err, msg) {
   console.log(msg.error); // msg.error == 'not implemented'
 });
 ```
+
+__Data__:
+```
+{ "q": "pong" }
+```
+
 
 ###.IpTunnel_showConnection(connection, [callback])
 * `connection` Number.

@@ -1,6 +1,7 @@
 var CJDNS = require('../lib/cjdns.js'),
     util = require('util'),
     fs = require('fs'),
+    util = require('util'),
     assert = require('assert');
 
 describe('cjdnsadmin', function() {
@@ -50,6 +51,7 @@ describe('cjdnsadmin', function() {
         it('should ping admin backend and return {"q": "pong"}', function(done) {
 
           cjdns.ping(function(err, msg) {
+            //console.log(msg);
             assert.ifError(err); 
             assert.equal(msg.q, 'pong');
             
@@ -62,6 +64,8 @@ describe('cjdnsadmin', function() {
         it('should return callback with info if async communication is enabled or not', function(done) {
 
           cjdns.Admin_asyncEnabled(function(err, msg) {
+            //console.log(msg);
+
             assert.ifError(err); 
 
             if (msg.asyncEnabled === 0 || msg.asyncEnabled === 1) {
@@ -77,6 +81,8 @@ describe('cjdnsadmin', function() {
         it('should return callback with array containing available functions', function(done) {
 
           cjdns.Admin_availableFunctions(0, function(err, functions) {
+            //console.log(util.inspect(functions, { showHidden: true, depth: null }));
+            
             functions = functions.availableFunctions;
             assert.ifError(err);
             assert.equal(typeof functions, 'object');
