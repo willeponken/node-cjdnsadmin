@@ -52,7 +52,7 @@ cjdns.Abs_availableFunctions(function(err, functions) {
 
 Find out if async calls are enabled.
 
-#####Example
+####Example
 __Code__:
 ```
 cjdns.Abs_asyncEnabled(function(err, result) {
@@ -75,7 +75,7 @@ cjdns.Abs_asyncEnabled(function(err, result) {
 
 Ping the CJDNS Admin backend, returns `{ 'q': 'pong' }` on success.
 
-#####Example
+####Example
 __Code__:
 ```
 cjdns.ping(function(err, msg) {
@@ -98,7 +98,7 @@ __Data__:
 
 Find out if async calls are enabled, returns object `{ 'asyncEnabled': [number] }`.
 
-#####Example
+####Example
 __Code__:
 ```
 cjdns.Admin_asyncEnabled(function(err, msg) {
@@ -124,7 +124,7 @@ __Data__:
 
 Get all the available CJDNS Admin functions, where `page` is the page to return.
 
-#####Example
+####Example
 __Code__:
 ```
 cjdns.Admin_availableFunctions(0, functions(err, functions) {
