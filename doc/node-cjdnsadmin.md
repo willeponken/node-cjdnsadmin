@@ -9,8 +9,8 @@ node-cjdnsadmin
 
 Ping the CJDNS Admin backend.
 
-Example;
-
+####Example
+__Code__:
 ```
 cjdns.Abs_ping(function(err, result) {
 
@@ -29,7 +29,8 @@ cjdns.Abs_ping(function(err, result) {
 
 Get all the available CJDNS Admin functions.
 
-Example;
+####Example
+__Code__:
 ```
 cjdns.Abs_availableFunctions(function(err, functions) {
 
