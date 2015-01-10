@@ -129,7 +129,7 @@ describe('cjdnsadmin', function() {
           cjdns.AuthorizedPasswords_add('test', 'test1test2test3test4', undefined, undefined, function (err, msg) {
 
             assert.ifError(err);
-            assert.equal(typeof msg, 'object');
+            assert.equal(msg.error, 'none');
 
             done()
           });
