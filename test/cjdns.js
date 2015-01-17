@@ -9,7 +9,7 @@ function Logger(enable) {
   this.enable = enable;
 }
 Logger.prototype.log = function(data) {
-  if (this.enable = true) {
+  if (this.enable) {
     console.log(data);
   }
 };
