@@ -4,6 +4,18 @@ var CJDNS = require('../lib/cjdns.js'),
     util = require('util'),
     assert = require('assert');
 
+/* Micro log lib */
+function Logger(enable) {
+  this.enable = enable;
+}
+Logger.prototype.log = function(data) {
+  if (this.enable = true) {
+    console.log(data);
+  }
+};
+var log = new Logger(false).log; // set to true for viewing data
+/* End of log lib */
+
 describe('cjdnsadmin', function() {
   describe('CJDNS(config)', function() {
 
@@ -51,8 +63,9 @@ describe('cjdnsadmin', function() {
         it('should ping admin backend and return {"q": "pong"}', function(done) {
 
           cjdns.ping(function(err, msg) {
-            //console.log(msg);
             assert.ifError(err); 
+            
+            log(msg);
             assert.equal(msg.q, 'pong');
             
             done();
@@ -64,9 +77,8 @@ describe('cjdnsadmin', function() {
         it('should return callback with info if async communication is enabled or not', function(done) {
 
           cjdns.Admin_asyncEnabled(function(err, msg) {
-            //console.log(msg);
-
             assert.ifError(err); 
+            log(msg);
 
             if (msg.asyncEnabled === 0 || msg.asyncEnabled === 1) {
               done();
@@ -81,7 +93,7 @@ describe('cjdnsadmin', function() {
         it('should return callback with array containing available functions', function(done) {
 
           cjdns.Admin_availableFunctions(0, function(err, functions) {
-            //console.log(util.inspect(functions, { showHidden: true, depth: null }));
+            log(util.inspect(functions, { showHidden: true, depth: null }));
             
             functions = functions.availableFunctions;
             assert.ifError(err);
@@ -101,8 +113,9 @@ describe('cjdnsadmin', function() {
 
           cjdns.Allocator_bytesAllocated(function (err, bytes) {
             bytes = bytes.bytes;
-
             assert.ifError(err);
+
+            log(bytes);
             assert.equal(typeof bytes, 'number');
 
             done()
@@ -114,8 +127,9 @@ describe('cjdnsadmin', function() {
         it('should return callback with memory tree dump', function(done) {
 
           cjdns.Allocator_snapshot(1, function (err, snapshot) {
-
             assert.ifError(err);
+            
+            log(snapshot);
             assert.equal(snapshot.error, 'none');
 
             done()
@@ -127,8 +141,9 @@ describe('cjdnsadmin', function() {
         it('should add a new authorized password and return callback', function(done) {
 
           cjdns.AuthorizedPasswords_add('test', 'test1test2test3test4', undefined, undefined, function (err, msg) {
-
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'none');
 
             done()
@@ -141,6 +156,7 @@ describe('cjdnsadmin', function() {
 
           cjdns.AuthorizedPasswords_list(function (err, users) {
             assert.ifError(err);
+            log(users);
             
             users = users.users;
             assert.notEqual(users.indexOf('test'), -1);
@@ -154,8 +170,9 @@ describe('cjdnsadmin', function() {
         it('should remove an user from authorized passwords and return callback with status', function(done) {
 
           cjdns.AuthorizedPasswords_remove('test', function (err, msg) {
-
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'none');
             
             done()
@@ -198,8 +215,9 @@ describe('cjdnsadmin', function() {
         it('should return the PID of the CJDNS core process', function(done) {
 
           cjdns.Core_pid(function (err, pid) {
-
             assert.ifError(err);
+
+            log(pid);
             assert.equal(typeof pid.pid, 'number');
             
             done()
@@ -216,6 +234,8 @@ describe('cjdnsadmin', function() {
           cjdns.ETHInterface_beacon(0, function(err, msg) {
             assert.ifError(err);
             assert.equal(msg.error, 'none');
+            
+            log(msg);
 
             beacon = msg.state;
           
@@ -274,6 +294,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.InterfaceController_disconnectPeer('pubKey', function (err, msg) {
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'bad key'); // Well, atleast it connectected to the CJDNS admin backend?
                                                 // You could change this to a real pubkey, and change 'bad key' to 'none',
                                                 // to test if it REALLY works.
@@ -288,6 +310,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.InterfaceController_peerStats(0, function (err, stats) {
             assert.ifError(err);
+            
+            log(stats);
             assert.equal(typeof stats.peers, 'object');
             
             done()
@@ -300,6 +324,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.IpTunnel_allowConnection('pubKey', 54, 'ip6Address', function (err, msg) {
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'key must be 52 characters long'); // Successfully talked to the CJDNS admin backend,
                                                                        // Replace 'pukKey' with a correct one and also
                                                                        // change ip6Prefix and ip6Address as it fits if
@@ -315,6 +341,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.IpTunnel_connectTo('pubKey', function (err, msg) {
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'key must be 52 characters long'); // Successfully talked to the CJDNS admin backend,
                                                                        // Replace 'pukKey' with a correct one if you want 
                                                                        // to test the rest.
@@ -329,6 +357,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.IpTunnel_listConnections(function (err, msg) {
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(typeof msg.connections, 'object');
 
             done()
@@ -341,6 +371,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.IpTunnel_removeConnection(2147483647, function (err, msg) { // Hopefully you don't have that many connections
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'not implemented'); // As of now, this functions is not implemented 
 
             done()
@@ -353,6 +385,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.IpTunnel_removeConnection(0, function (err, msg) {
             assert.ifError(err);
+            
+            log(msg);
             assert.equal(msg.error, 'not implemented'); // As of now, this functions is not implemented 
 
             done()
@@ -365,6 +399,8 @@ describe('cjdnsadmin', function() {
 
           cjdns.NodeStore_dumpTable(0, function (err, table) {
             assert.ifError(err);
+            
+            log(table);
             assert.equal(typeof table, 'object');
             
             done()
