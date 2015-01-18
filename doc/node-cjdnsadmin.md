@@ -163,7 +163,7 @@ __Data__:
 
 Get the number of bytes that is allocated by CJDNS, returns object `{ 'bytes': [number] }`.
 
-Example;
+####Example
 ```
 cjdns.Allocator_bytesAllocated(function(err, bytes) {
   bytes = bytes.bytes;
@@ -181,7 +181,7 @@ cjdns.Allocator_bytesAllocated(function(err, bytes) {
 
 Dump CJDNS' memory snapshot to stderr.
 
-Example;
+####Example
 ```
 cjdns.Allocator_snapshot(0);
 ```
@@ -195,7 +195,7 @@ cjdns.Allocator_snapshot(0);
 
 Add a new user to authorized passwords.
 
-Example;
+####Example
 ```
 cjdns.AuthorizedPasswords_add('willeponken', 'qwertasdfgzxcvbn123');
 ```
@@ -205,7 +205,7 @@ cjdns.AuthorizedPasswords_add('willeponken', 'qwertasdfgzxcvbn123');
 
 Get a list of all authorized users.
 
-Example;
+####Example
 ```
 cjdns.AuthorizedPasswords_list(function(err, users) {
   if (err) {
@@ -227,7 +227,7 @@ cjdns.AuthorizedPasswords_list(function(err, users) {
 
 Remove a user from the authorized passwords.
 
-Example;
+####Example
 ```
 cjdns.AuthorizedPasswords_remove('willeponken', function(err, msg) {
   if (err) {
@@ -247,7 +247,7 @@ __Notice:__ This one is not enabled in the unit test because it... You know, exi
 
 Stop CJDNS core.
 
-Example;
+####Example
 ```
 cjdns.Core_exit(function(err, result) {
   if (err) {
@@ -270,7 +270,7 @@ __Notice:__ This functions is probably deprecated (does not work, atleast for me
 
 Set up TUN device using the same function as CJDNS uses during startup.
 
-Example;
+####Example
 ```
 cjdns.Core_initTunnel('cjdnsadmin', function(err, result) {
   if (err) {
@@ -290,7 +290,7 @@ cjdns.Core_initTunnel('cjdnsadmin', function(err, result) {
 
 Get PID of the CJDNS core process.
 
-Example;
+####Example
 ```
 cjdns.Core_pid(function (err, pid) {
   if (err) {
@@ -309,7 +309,7 @@ cjdns.Core_pid(function (err, pid) {
 
 Get state of beacon mode, or change it.
 
-Example;
+####Example
 ```
 
 // Get current beacon mode
@@ -334,7 +334,7 @@ cjdns.ETHInterface_beacon(0, 2);
 
 Connect an ETHInterface to another computer which has an ETHInterface running.
 
-Example;
+####Example
 ```
 cjdns.ETHInterface_beginConnection('pubKey', 'ab:cd:ef:12:34:45', 0, 'asdfzxcvbn1234', function(err, msg) {
   if (err) {
@@ -353,7 +353,7 @@ __Notice:__ You'll need to run this as root or else it'll faild with "'error': '
 
 Create a new ETHInterface and bind it to a device.
 
-Example;
+####Example
 ```
 cjdns.ETHInterface_new('eth0', function(err, msg) {
   if (err) {
@@ -370,7 +370,7 @@ cjdns.ETHInterface_new('eth0', function(err, msg) {
 
 Disconnect a peer by public key.
 
-Example;
+####Example
 ```
 cjdns.InterfaceController_disconnectPeer('pubKey');
 ```
@@ -381,7 +381,7 @@ cjdns.InterfaceController_disconnectPeer('pubKey');
 
 Get peer stats.
 
-Example;
+####Example
 ```
 cjdns.InterfaceControler_peerStats(0, function(err, stats) {
   if (err) {
@@ -400,9 +400,15 @@ cjdns.InterfaceControler_peerStats(0, function(err, stats) {
 
 Allow incommming connection from another node.
 
-Example;
+####Example
+__Code__:
 ```
 cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
+```
+
+__Data__:
+```
+{ error: 'none' }
 ```
 
 ###.IpTunnel_connectTo(publicKeyOfNodeToConnectTo, [callback])
@@ -411,9 +417,15 @@ cjdns.IpTunnel_allowConnection('pubKey', 54', '::1');
 
 Initiate an outgoing connection to another node and request IP addresses from them.
 
-Example;
+####Example
+__Code__:
 ```
 cjdns.IpTunnel_connectTo('pubKey');
+```
+
+__Data__:
+```
+{ error: 'none' }
 ```
 
 ###.IpTunnel_listConnections(callback)
@@ -421,7 +433,8 @@ cjdns.IpTunnel_connectTo('pubKey');
 
 List IP tunnel connections.
 
-Example;
+####Example
+__Code__:
 ```
 cjdns.IpTunnel_listConnections(function(err, connections) {
   if (err) {
@@ -431,6 +444,11 @@ cjdns.IpTunnel_listConnections(function(err, connections) {
   connections = connections.connections;
   console.log('IP tunnel connections', connections);
 });
+```
+
+__Data__:
+```
+{ error: 'not implemented' }
 ```
 
 ###.IpTunnel_removeConnection(connection, [callback])
@@ -455,9 +473,8 @@ cjdns.IpTunnel_removeConnection(0, function(err, msg) {
 
 __Data__:
 ```
-{ "q": "pong" }
+{ error: 'not implemented' }
 ```
-
 
 ###.IpTunnel_showConnection(connection, [callback])
 * `connection` Number.
@@ -467,7 +484,8 @@ __Notice:__ NOT IMPLEMENTED
 
 Show IP tunnel connection based on connection number, which can be obtained from `IpTunnel_listConnections()`.
 
-Example;
+####Example
+__Code__:
 ```
 cjdns.IpTunnel_showConnection(0, function(err, msg) {
   if (err) {
@@ -478,13 +496,19 @@ cjdns.IpTunnel_showConnection(0, function(err, msg) {
 });
 ```
 
+__Data__:
+```
+{ error: 'not implemented' }
+```
+
 ###.NodeStore_dumpTable(page, callback)
 * `page` Number.
 * `callback` Function.
 
 Get a dump of CJDNS' NodeStore table.
 
-Example;
+####Example
+__Code__:
 ```
 cjdns.NodeStore_dumpTable(0, function(err, table) {
   if (err) {
@@ -495,28 +519,62 @@ cjdns.NodeStore_dumpTable(0, function(err, table) {
 });
 ```
 
+__Data__:
+```
+{ count: 129,
+  more: 1,
+  peers: 1,
+  routingTable: 
+   [ { ip: 'fc4f:c18d:61d0:14da:0d8d:55c4:e5f3:f961',
+       link: 14976923,
+       path: '0000.0000.05ef.1233',
+       time: 120300,
+       version: 12 },
+     { ip: 'fc20:b010:9c58:8881:0cf6:7bcb:e034:8f78',
+       link: 14375909,
+       path: '0000.0000.066f.1233',
+       time: 205125,
+       version: 12 },
+     { ip: 'fc56:8313:1e14:1a50:0c01:0850:a53e:7127',
+       link: 34412253,
+       path: '0000.0000.0000.9a33',
+       time: 159315,
+       version: 12 },
+     { ip: 'fcd1:ea5d:24e5:cc7a:0ada:8d93:ebf7:22b7',
+       link: 9968420,
+       path: '0000.0000.0063.1233',
+       time: 111384,
+       version: 13 },
+     { ip: 'fc87:5019:8605:51f6:09ed:14d1:19b8:05c6',
+       link: 22677742,
+       path: '0000.0002.4e4a.9a33',
+       time: 98821,
+       version: 12 },
+     { ip: 'fc29:0895:df9f:cbf1:06ee:1750:8921:4704',
+       link: 20449584,
+       path: '0000.0000.0009.ae33',
+       time: 35742,
+       version: 13 },
+     { ip: 'fc24:7863:1f09:b03c:03fd:a861:96e8:038b',
+       link: 20277495,
+       path: '0000.0133.4299.2e33',
+       time: 126339,
+       version: 13 },
+     { ip: 'fc4c:6906:317e:d158:015e:e0f5:21be:e382',
+       link: 16102375,
+       path: '0000.986e.c299.2e33',
+       time: 144392,
+       version: 13 } ] }
+```
+
 ###.NodeStore_nodeForAddr(ip, callback)
 * `ip` String.
 * `callback` Function.
 
 Takes the IP for a node and returns information about that node.
 
-The data returned looks somewhat like this;
-```
-{ error: 'none',
-  result: 
-   { bestParent: 
-      { ip: 'fc74:73e8:3913:f15b:d463:2fe7:db69:381e',
-        parentChildLabel: '0000.0000.0000.0001' },
-     encodingScheme: [ [Object], [Object], [Object] ],
-     key: 'mh9sdvb6jv69x76y21kk5vp0n5dmtrtxl6zl7dck1ywcq2c49xn0.k',
-     linkCount: 3,
-     protocolVersion: 12,
-     reach: 4294967295,
-     routeLabel: '0000.0000.0000.0001' } }
-```
-
-Example;
+####Example
+__Code__:
 ```
 cjdns.NodeStore_nodeForAddr('fc74:73e8:3913:f15b:d463:2fe7:db69:381e', function(err, data) {
   if (err) {
@@ -529,4 +587,19 @@ cjdns.NodeStore_nodeForAddr('fc74:73e8:3913:f15b:d463:2fe7:db69:381e', function(
     console.warn('Unable to find IP');
   }
 });
+```
+
+__Data__:
+```
+{ error: 'none',
+  result: 
+   { bestParent: 
+      { ip: 'fc74:73e8:3913:f15b:d463:2fe7:db69:381e',
+        parentChildLabel: '0000.0000.0000.0001' },
+     encodingScheme: [ [Object], [Object], [Object] ],
+     key: 'mh9sdvb6jv69x76y21kk5vp0n5dmtrtxl6zl7dck1ywcq2c49xn0.k',
+     linkCount: 3,
+     protocolVersion: 12,
+     reach: 4294967295,
+     routeLabel: '0000.0000.0000.0001' } }
 ```

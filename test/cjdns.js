@@ -5,15 +5,17 @@ var CJDNS = require('../lib/cjdns.js'),
     assert = require('assert');
 
 /* Micro log lib */
-function Logger(enable) {
-  this.enable = enable;
-}
-Logger.prototype.log = function(data) {
-  if (this.enable) {
-    console.log(data);
+var Logger = function(enable) {
+  return {
+    log: function(data) {
+      if (enable) {
+        console.log(data);
+      }
+    }
   }
 };
-var log = new Logger(false).log; // set to true for viewing data
+
+var log = Logger(true).log; // set to true for viewing data
 /* End of log lib */
 
 describe('cjdnsadmin', function() {
@@ -339,13 +341,11 @@ describe('cjdnsadmin', function() {
       describe('.IpTunnel_connectTo(publicKeyOfNodeToConnectTo, callback)', function() {
         it('should Initiate an outgoing connection to another node and request IP addresses from them', function(done) {
 
-          cjdns.IpTunnel_connectTo('pubKey', function (err, msg) {
+          cjdns.IpTunnel_connectTo('dtq4ywx9t3kc4lvx7rkvd0dwss43v68gnt2tqwh7w165kg5cuhd0.k', function (err, msg) {
             assert.ifError(err);
             
             log(msg);
-            assert.equal(msg.error, 'key must be 52 characters long'); // Successfully talked to the CJDNS admin backend,
-                                                                       // Replace 'pukKey' with a correct one if you want 
-                                                                       // to test the rest.
+            assert.equal(msg.error, 'none');
             
             done()
           });
